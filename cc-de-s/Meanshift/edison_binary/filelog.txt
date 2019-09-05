@@ -1,0 +1,112 @@
+Image E:\LvLiang\IamgeMatting\IamgeMatting\ImageMatting_Union\input_training_lowres\GT4.png loaded
+Input parameters:
+	Spatial Bandwidth	=    7
+	Color Bandwidth	=  6.5
+	Minimum Region	=   20
+timer start...
+done.
+Applying mean shift (Using Lattice) ... done.(  6.41 sec)
+Connecting regions         ...done. (  0.07 seconds, numRegions =  81018)
+Applying transitive closure...done. (  0.25 seconds, numRegions =  10720)
+Pruning spurious regions   ...done. (  0.15 seconds, numRegions =   1108)
+timer stop, elapsed 7.8 seconds.
+Input parameters:
+	Spatial Bandwidth	=    9
+	Color Bandwidth	=  3.0
+	Minimum Region	=   20
+timer start...
+done.
+Applying mean shift (Using Lattice) ... done.(  8.94 sec)
+Connecting regions         ...done. (  0.06 seconds, numRegions =  92054)
+Applying transitive closure...done. (  0.15 seconds, numRegions =  57288)
+Pruning spurious regions   ...done. (  0.22 seconds, numRegions =   3791)
+timer stop, elapsed 9.50 seconds.
+Input parameters:
+	Spatial Bandwidth	=    9
+	Color Bandwidth	=  5.0
+	Minimum Region	=   20
+timer start...
+done.
+Applying mean shift (Using Lattice) ... done.(  8.81 sec)
+Connecting regions         ...done. (  0.05 seconds, numRegions =  49218)
+Applying transitive closure...done. (  0.11 seconds, numRegions =  20258)
+Pruning spurious regions   ...done. (  0.10 seconds, numRegions =   1718)
+timer stop, elapsed 9.15 seconds.
+Input parameters:
+	Spatial Bandwidth	=    9
+	Color Bandwidth	=  4.0
+	Minimum Region	=   20
+timer start...
+done.
+Applying mean shift (Using Lattice) ... done.(  9.22 sec)
+Connecting regions         ...done. (  0.11 seconds, numRegions =  61807)
+Applying transitive closure...done. (  0.18 seconds, numRegions =  32874)
+Pruning spurious regions   ...done. (  0.22 seconds, numRegions =   2494)
+timer stop, elapsed 9.89 seconds.
+Input parameters:
+	Spatial Bandwidth	=    9
+	Color Bandwidth	=  3.0
+	Minimum Region	=   20
+timer start...
+done.
+Applying mean shift (Using Lattice) ... done.(  9.45 sec)
+Connecting regions         ...done. (  0.11 seconds, numRegions =  92054)
+Applying transitive closure...done. (  0.28 seconds, numRegions =  57288)
+Pruning spurious regions   ...done. (  0.22 seconds, numRegions =   3791)
+timer stop, elapsed 10.22 seconds.
+Image E:\LvLiang\IamgeMatting\IamgeMatting\ImageMatting_Union\input_training_lowres\GT13.png loaded
+Input parameters:
+	Spatial Bandwidth	=    9
+	Color Bandwidth	=  3.0
+	Minimum Region	=   20
+timer start...
+done.
+Applying mean shift (Using Lattice) ... done.(  7.88 sec)
+Connecting regions         ...done. (  0.06 seconds, numRegions =  79000)
+Applying transitive closure...done. (  0.15 seconds, numRegions =  49321)
+Pruning spurious regions   ...done. (  0.13 seconds, numRegions =   3060)
+timer stop, elapsed 8.30 seconds.
+Input parameters:
+	Spatial Bandwidth	=    9
+	Color Bandwidth	=  4.0
+	Minimum Region	=   20
+timer start...
+done.
+Applying mean shift (Using Lattice) ... done.(  8.75 sec)
+Connecting regions         ...done. (  0.11 seconds, numRegions =  53780)
+Applying transitive closure...done. (  0.23 seconds, numRegions =  28793)
+Pruning spurious regions   ...done. (  0.21 seconds, numRegions =   2071)
+timer stop, elapsed 9.48 seconds.
+Input parameters:
+	Spatial Bandwidth	=   20
+	Color Bandwidth	=  4.0
+	Minimum Region	=   20
+timer start...
+done.
+Applying mean shift (Using Lattice) ... done.( 36.61 sec)
+Connecting regions         ...done. (  0.05 seconds, numRegions =  49123)
+Applying transitive closure...done. (  0.13 seconds, numRegions =  27105)
+Pruning spurious regions   ...done. (  0.17 seconds, numRegions =   1657)
+timer stop, elapsed 37.9 seconds.
+Input parameters:
+	Spatial Bandwidth	=    9
+	Color Bandwidth	=  3.0
+	Minimum Region	=   20
+timer start...
+done.
+Applying mean shift (Using Lattice) ... done.(  7.66 sec)
+Connecting regions         ...done. (  0.10 seconds, numRegions =  79000)
+Applying transitive closure...done. (  0.28 seconds, numRegions =  49321)
+Pruning spurious regions   ...done. (  0.25 seconds, numRegions =   3060)
+timer stop, elapsed 8.46 seconds.
+Input parameters:
+	Spatial Bandwidth	=    9
+	Color Bandwidth	=  3.0
+	Minimum Region	=  100
+timer start...
+done.
+Applying mean shift (Using Lattice) ... done.(  8.80 sec)
+Connecting regions         ...done. (  0.06 seconds, numRegions =  79000)
+Applying transitive closure...done. (  0.15 seconds, numRegions =  49321)
+Pruning spurious regions   ...done. (  0.14 seconds, numRegions =   1100)
+timer stop, elapsed 9.24 seconds.
