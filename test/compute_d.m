@@ -15,14 +15,14 @@ img_dir = dir([img_path, '*.png']);
 d = zeros(27, 2);
 for ii = 1:length(img_dir)
     disp(ii);
-	% 读资源
-	img_url = [img_path, img_dir(ii).name];
-	trimap_url = [trimap_path, img_dir(ii).name];
-	img = imread(img_url);
-	trimap = imread(trimap_url);
+    % 读资源
+    img_url = [img_path, img_dir(ii).name];
+    trimap_url = [trimap_path, img_dir(ii).name];
+    img = imread(img_url);
+    trimap = imread(trimap_url);
 	  
-	% 统一做预处理
-	mask = imread([mask_path, img_dir(ii).name]);
+    % 统一做预处理
+    mask = imread([mask_path, img_dir(ii).name]);
 
     % 预处理之后三分图的区域
     F_ind = find(mask == 255); 
