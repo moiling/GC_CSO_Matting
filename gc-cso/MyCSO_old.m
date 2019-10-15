@@ -49,7 +49,7 @@ for ii = 1:population
     p(ii, :) = XRRmin(ii, :) + (XRRmax(ii, :) - XRRmin(ii, :)) .* rand(1, d, 'single');
 end
 
-% 如果有初始解，把第一个设置为初始�?
+% 将之前算好的解作为初始化解，当作一个个体
 if exist('initial_x', 'var') && ~isempty(initial_x) && ~initial_x == false
    p(1, :) = initial_x; 
 end
