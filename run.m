@@ -38,14 +38,14 @@ end
 % 按照维度低、中、高三类顺序，每次挑出类型中降维后维度最小的图算，这样算的快
 sorted_pics = [17, 23, 25, 15, 9, 13, 5, 2, 14, 10, 16, 12, 7, 18, 6, 20, 22, 11, 1, 3, 24, 21, 8, 26, 27, 4, 19];
 for ii = sorted_pics
-	fprintf('%d/27,%s\n', ii, img_dir(ii).name);
+    fprintf('%d/27,%s\n', ii, img_dir(ii).name);
     % 读资源
     img_url = [img_path, img_dir(ii).name];
-	trimap_url = [trimap_path, img_dir(ii).name];
-	img = imread(img_url);
-	trimap = imread(trimap_url);
-	fprintf('start expansion...\n');
-	% 统一做预处理
+    trimap_url = [trimap_path, img_dir(ii).name];
+    img = imread(img_url);
+    trimap = imread(trimap_url);
+    fprintf('start expansion...\n');
+    % 统一做预处理
     if exist([mask_path, img_dir(ii).name(1:end-4), '.png'], 'file')
         mask = imread([mask_path, img_dir(ii).name(1:end-4), '.png']);
         fprintf('already expansioned. read mask finished.\n');
@@ -55,21 +55,21 @@ for ii = sorted_pics
         fprintf('expansion finished.\n');
     end
 
-	% 运算30次
+    % 运算30次
     for jj = 1:30
         fprintf('%d/30\n', jj);
 
-		file_name = sprintf('%s_iter_%d', img_dir(ii).name(1:end-4), jj);
-		% GC-CSO
+        file_name = sprintf('%s_iter_%d', img_dir(ii).name(1:end-4), jj);
+        % GC-CSO
         if run_gc_cso && ~exist([gc_cso_path, file_name, '_without_smoothing.png'], 'file')
         profile on -memory
         tic
-		[alpha_matte, fitness, x] = GC_CSO(img, trimap, max_fitness_evaluation, mask);
+        [alpha_matte, fitness, x] = GC_CSO(img, trimap, max_fitness_evaluation, mask);
         toc
         % profile
         p = profile('info');
         profsave(p, [gc_cso_path, 'profile/', file_name]);
-		% 保存GC-CSO中间结果（待平滑处理） 	
+        % 保存GC-CSO中间结果（待平滑处理） 	
         save([gc_cso_path, file_name, '.mat'], 'alpha_matte', 'fitness', 'x');				
     	imwrite(alpha_matte, [gc_cso_path, file_name, '_without_smoothing.png']);
         end
