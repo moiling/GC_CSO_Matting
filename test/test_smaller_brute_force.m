@@ -15,9 +15,9 @@ cut_size = 20;
 for ii = 5
 
     img_url = [img_path, img_dir(ii).name];
-	trimap_url = [trimap_path, img_dir(ii).name];
-	img = imread(img_url);
-	trimap = imread(trimap_url);
+    trimap_url = [trimap_path, img_dir(ii).name];
+    img = imread(img_url);
+    trimap = imread(trimap_url);
       
     [H, W, C] = size(img);
     
