@@ -16,7 +16,6 @@ clear('lb', 'ub');
 n = d;
 initial_flag = 0;
 
-
 %phi setting (the only parameter in CSO, please SET PROPERLY)
 if(d >= 2000)
     phi = 0.2;
@@ -39,7 +38,6 @@ elseif(d >= 100)
 else
     population = 50;
 end
-
 
 % initialization
 % F = zeros(population,maxfe);
@@ -83,7 +81,6 @@ p(1, :) = best_x;
 % main loop
 while(FES < maxfe)
     
-    
     % generate random pairs
     rlist = randperm(population);
     rpairs = [rlist(1:ceil(population/2)); rlist(floor(population / 2) + 1:population)]';
@@ -110,7 +107,6 @@ while(FES < maxfe)
         p(losers(i), :) = min(p(losers(i), :), lu(2, :));
     end
     
-    
     % fitness evaluation
     all_fitness = FitnessFcn(p(losers, :));
     fitness(losers, :) = sum(all_fitness, 2);
@@ -128,7 +124,7 @@ while(FES < maxfe)
     p(1, :) = best_x;
     fitness(1, :) = sum(best_fitness);
     
-    fprintf('(%d/%d) Best fitness: %e\n', FES,maxfe,bestever);
+    fprintf('(%d/%d) Best fitness: %e\n', FES, maxfe, bestever);
     FES = FES + ceil(population / 2);
     F(:, gen +1 ) = [FES; fitness];
     gen = gen + 1;

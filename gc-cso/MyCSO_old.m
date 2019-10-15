@@ -1,4 +1,4 @@
-function [x, bestever, F] = MyCSO(FitnessFcn, numberOfVariables, lb, ub, maxfe, initial_x, print_process, SaveProcessFcn)
+function [x, bestever, F] = MyCSO_old(FitnessFcn, numberOfVariables, lb, ub, maxfe, initial_x, print_process, SaveProcessFcn)
 % MYCSO Summary of this function goes here
 %   Detailed explanation goes here
 if ~exist('print_process', 'var') || isempty(print_process)

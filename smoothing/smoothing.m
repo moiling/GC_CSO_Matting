@@ -6,7 +6,6 @@ lambda   = 100;
 epsilon  = [];
 win_size = [];
 
-
 if max(image(:)) > 1
     image = image / 255;
 end

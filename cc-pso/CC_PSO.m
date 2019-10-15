@@ -39,7 +39,7 @@ function [alpha_matte, fitness, x] = CC_PSO(img, trimap, max_fitness_evaluation,
     cc_B_mindist = B_mindist(U_ind(cc_U_ind));
 
     % 聚类的结果PSO
-    FitnessFcn = @(x) CCPSO_CostFunc(x, F_rgb, B_rgb, cc_rgb, F_s, B_s, cc_s, cc_F_mindist, cc_B_mindist);
+    FitnessFcn = @(x) CostFunc(x, F_rgb, B_rgb, cc_rgb, F_s, B_s, cc_s, cc_F_mindist, cc_B_mindist);
     number_of_variables = 2 * length(U_ind(cc_U_ind));
     lb = ones(1, number_of_variables); % Lower bound
     ub = [repmat(size(F_rgb, 1), 1, length(U_ind(cc_U_ind))), repmat(size(B_rgb, 1), 1, length(U_ind(cc_U_ind)))]; % Upper bound
@@ -69,23 +69,14 @@ function [alpha_matte, fitness, x] = CC_PSO(img, trimap, max_fitness_evaluation,
         % 按照之前算出的最优解，拼出一个初始解
         initial_x = [repmat(cc_x(ii), 1, length(ii_ind)), repmat(cc_x(ii + length(U_ind(cc_U_ind))), 1, length(ii_ind))];
         
-        % 如果该类的数量在阈值以下，便不再二次CSO
-        % if length(ii_ind) < 10
-            ii_x = initial_x;
-        %else       
-        %    FitnessFcn = @(x) CCPSO_CostFunc(x, F_rgb, B_rgb, ii_rgb, F_s, B_s, ii_s, ii_F_mindist, ii_B_mindist);
-        %    number_of_variables = 2 * length(ii_ind);
-        %    lb = ones(1, number_of_variables);
-        %    ub = [repmat(size(F_rgb, 1), 1, length(ii_ind)), repmat(size(B_rgb, 1), 1, length(ii_ind))];
-        %    % CCPSO
-        %    [ii_x, ~] = MyCCPSO(FitnessFcn, number_of_variables, lb, ub, max_fitness_evaluation, initial_x);
-        %end
+        ii_x = initial_x;
         
         % 计算alpha、fitness、confidence
-        [ii_fitness, ii_alpha] = CCPSO_CostFunc_all_fitness(ii_x, F_rgb, B_rgb, ii_rgb, F_s, B_s, ii_s, ii_F_mindist, ii_B_mindist);
+        [ii_fitness, ii_alpha] = CostFunc(ii_x, F_rgb, B_rgb, ii_rgb, F_s, B_s, ii_s, ii_F_mindist, ii_B_mindist, true);
         ii_alpha(ii_alpha > 1) = 1;
         ii_alpha(ii_alpha < 0) = 0;
         ii_alpha = ii_alpha * 255;
+        
         % 结果保存在整体的x，fitness，alpha
         x(ii_U_ind) = ii_x(1 : length(ii_ind));
         x(ii_U_ind + length(U_ind)) = ii_x(length(ii_ind) + 1: end);

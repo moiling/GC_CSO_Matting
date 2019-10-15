@@ -55,24 +55,17 @@ for i=1 : Ih
             TColDiff(:,:,2) = TBlockC (:,:,2) - PCVal(2) ;
             TColDiff(:,:,3) = TBlockC (:,:,3) - PCVal(3) ;
             TColDist = sqrt(sum(TColDiff.^2,3)) ;
-%             [TColDistMin , TColDistMinInd] = min(TColDist(:)) ;
-%             TChk2= (TColDist == TColDistMin) ;
-            TCDistortion = TColDist < Kc ;
-            
+            % [TColDistMin , TColDistMinInd] = min(TColDist(:)) ;
+            % TChk2= (TColDist == TColDistMin) ;
+            TCDistortion = TColDist < Kc ;           
             TChk1= (TCDistortion .* TBlockR)>0 ;
             if  sum (TChk1(:)) >= 1
                 TD1= TBlockDist(TChk1) ; 
                 [TD1min, TDminInd]=min(TD1) ; 
-                TSelPixMask = TBlockFBUMask(TChk1) ;
-                
-                
+                TSelPixMask = TBlockFBUMask(TChk1) ;                                
                 RmaskRExpand (i,j)= TSelPixMask(TDminInd) ;
             end
-            
-            
-        end
-        
-        
+        end       
     end
 end
 

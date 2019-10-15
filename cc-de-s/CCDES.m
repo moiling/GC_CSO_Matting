@@ -1,19 +1,15 @@
 function [gbest, gbest_val] = CCDES (I, Trimap, MaskAct, Un, Un_num, FSample, BSample, ImageNum)
 %************************************************************
-% -I, Trimap: ÊäÈëµÄÍ¼ÏñÒÔ¼°ÓëÆä¶ÔÓ¦µÄtrimap.
-% -MaskAct: ±ê¼Ç¾ØÕó.
-% -Un: Í¼ÏñÖĞµÄÎ´ÖªÏóËØµãµÄ¸öÊı.
-% -Fsample: Ç°¾°Ñù±¾µãµÄ¼¯ºÏ.
-% -Bsample: ±³¾°Ñù±¾µãµÄ¼¯ºÏ.
-% -group_num: µÚ¼¸×éÓÅ»¯.
-% -ImageNum: ´ı¿ÙÍ¼µÄµÚ¼¸·ùÍ¼Æ¬.
+% -I, Trimap: è¾“å…¥çš„å›¾åƒä»¥åŠä¸å…¶å¯¹åº”çš„trimap.
+% -MaskAct: æ ‡è®°çŸ©é˜µ.
+% -Un: å›¾åƒä¸­çš„æœªçŸ¥è±¡ç´ ç‚¹çš„ä¸ªæ•°.
+% -Fsample: å‰æ™¯æ ·æœ¬ç‚¹çš„é›†åˆ.
+% -Bsample: èƒŒæ™¯æ ·æœ¬ç‚¹çš„é›†åˆ.
+% -group_num: ç¬¬å‡ ç»„ä¼˜åŒ–.
+% -ImageNum: å¾…æŠ å›¾çš„ç¬¬å‡ å¹…å›¾ç‰‡.
 %************************************************************
 
-%% ¼ÇÂ¼FEsÖµ²»Í¬Ê±£¬ÆÀ¹Àº¯ÊıÖµÓëMSEÖµµÄ±ä»¯
-msename = strcat('./Results/CC-DE-S/high', num2str(ImageNum), '_MSE.txt');
-fid = fopen(msename, 'wt');
-
-%% »ù±¾²ÎÊıÉèÖÃ
+%% åŸºæœ¬å‚æ•°è®¾ç½®
 FEs = 0;
 NP = 4;%10;
 Max_FEs = 5E3;
@@ -24,7 +20,7 @@ F_up_bound = size(FSample,1);
 B_low_bound = 1;
 B_up_bound = size(BSample,1);
 
-%% ³õÊ¼»¯
+%% åˆå§‹åŒ–
 F_mutation = 0.5;
 CR = 0.9;
 x = zeros(NP, dim);
@@ -49,40 +45,18 @@ FEs = NP;
 [gbest_val, gbestid] = max(value_of_x(:));
 gbest = x(gbestid, :);
 
-%% ºóÆÚ´¦Àí
-%[TR_FVAlpha, TRobust, ~] = GetAlpha(I, MaskAct, reshape(gbest(1, :), 2, size(Un, 1))', FSample, BSample, Un);
-%RConf1=sqrt(TRobust) ;
-%RConf1(MaskAct==1)=1 ; RConf1(MaskAct==5)=1 ;
-%pack=[] ;
-%pack(:,:,1) = uint8(TR_FVAlpha*255) ;
-%pack(:,:,2) = uint8((RConf1)*255 ) ;
-%pack(:,:,3) = uint8(Trimap) ;
-%alpha = Fun_SmoothingMatting(I, pack) ;
-%ImageName = ['./high/', num2str(ImageNum), '_', num2str(FEs), '_alphaMatting.png'];
-
-%imwrite(uint8(alpha*255), ImageName);
-%imwrite(uint8(TR_FVAlpha*255), ['./high/', num2str(ImageNum), '_', num2str(FEs), '_no_smoothing.png']);
-
-%% ¼ÆËãMSEÖµ
-%result = alpha;
-%true = imread(strcat('./gt_training_highres/GT',num2str(ImageNum, '%02d'),'.png'));
-%true = rgb2gray(true);
-%true = im2double(true);
-%MSE_result = sum(sum((result - true).^2)) / (size(I, 1)*size(I, 2));
-%fprintf(fid, '%d\t%d\t%d\n', MSE_result, FEs, gbest_val);
-
-%% CC-DE-Sµü´ú½ø»¯
+%% CC-DE-Sè¿­ä»£è¿›åŒ–
 Iteration = 1;
 %*********************************************
 while (Iteration <= 0)
     count_dim = 0;
     for s = 1:SwarmSize
        %s
-       % leftÓërifht±ê¼Çµ±Ç°ÖÖÈºËùÔÚµÄÎ³¶ÈÇø¼ä
+       % leftä¸rifhtæ ‡è®°å½“å‰ç§ç¾¤æ‰€åœ¨çš„çº¬åº¦åŒºé—´
         left = count_dim + 1;
         right = count_dim + Un_num(s, 1);
         count_dim = right;
-       % µ±Ç°ÖÖÈºµÄ½ø»¯
+       % å½“å‰ç§ç¾¤çš„è¿›åŒ–
         for i = 1 : NP
             r1 = round(1 + rand*(NP - 1));
             r2 = round(1 + rand*(NP - 1));
@@ -90,7 +64,7 @@ while (Iteration <= 0)
                 r1 = ceil(1 + rand*(NP - 1));
                 r2 = ceil(1 + rand*(NP - 1));
             end
-            z = round(left + rand*(right-left)); % ±ê¼ÇÒ»¶¨»á½øĞĞÍ»±äµÄÎ³¶Èz.
+            z = round(left + rand*(right-left)); % æ ‡è®°ä¸€å®šä¼šè¿›è¡Œçªå˜çš„çº¬åº¦z.
             for j = left : right
                 v(i,j) = x(i,j) + F_mutation*(x(gbestid, j) - x(i, j)) + F_mutation*(x(r1, j) - x(r2, j));
                 if(j == z || rand <= CR)
@@ -100,7 +74,7 @@ while (Iteration <= 0)
                 end
             end
        end
-        %************±ß½çÔ¼Êø*************************
+        %************è¾¹ç•Œçº¦æŸ*************************
         u(:, left:right) = round(u(:, left:right));
         for i = 1:NP
             for j = left:right
@@ -130,23 +104,6 @@ while (Iteration <= 0)
         end
         disp(strcat(num2str(gbest_val),', FEs:',num2str(FEs)));
         
-        %% ºóÆÚ´¦Àí
-        %[TR_FVAlpha, TRobust, ~] = GetAlpha(I, MaskAct, reshape(gbest(1, :), 2, size(Un, 1))', FSample, BSample, Un);
-        %RConf1=sqrt(TRobust) ;
-        %RConf1(MaskAct==1)=1 ; RConf1(MaskAct==5)=1 ;
-        %pack=[] ;
-        %pack(:,:,1) = uint8(TR_FVAlpha*255 ) ;
-        %pack(:,:,2) = uint8((RConf1)*255 ) ;
-        %pack(:,:,3) = uint8(Trimap) ;
-        %alpha = Fun_SmoothingMatting(I, pack) ;
-        %ImageName = ['./high/', num2str(ImageNum), '_', num2str(FEs), '_alphaMatting.png'];
-        %imwrite(uint8(TR_FVAlpha*255), ['./high/', num2str(ImageNum), '_', num2str(FEs), '_no_smoothing.png']);
-        %imwrite(uint8(alpha*255), ImageName);
-        
-        %% ¼ÆËãMSEÖµ
-        %result = alpha;
-        %MSE_result = sum(sum((result - true).^2)) / (size(I, 1)*size(I, 2));
-        %fprintf(fid, '%d\t%d\t%d\n', MSE_result, FEs, gbest_val);
     end
     Iteration = Iteration + 1;
 end

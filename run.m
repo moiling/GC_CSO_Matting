@@ -9,9 +9,9 @@ addpath(genpath(pwd));
 max_fitness_evaluation = 5e3;
 mask_iter = 11;
 path = './data/train/';
-img_path = [path, 'input/input_training_highres/'];
-trimap_path = [path, 'trimap/trimap_training_highres/Trimap1/'];
-gt_path = [path, 'ground_truth/gt_training_highres/'];
+img_path = [path, 'input/input_training_lowres/'];
+trimap_path = [path, 'trimap/trimap_training_lowres/Trimap1/'];
+gt_path = [path, 'ground_truth/gt_training_lowres/'];
 img_dir = dir([img_path, '*.png']);
 output_path = ['./result/eval-', num2str(max_fitness_evaluation, '%e'), '-mask-', num2str(mask_iter), '/'];
 gc_cso_path = [output_path, 'cc2-cso/'];
@@ -92,16 +92,16 @@ for ii = sorted_pics
         if run_cc_de_s && ~exist([de_path, file_name, '_without_smoothing.png'], 'file')
         profile on -memory
         tic
-    	[alpha_matte, fitness, x] = CC_DE_S(img, trimap, max_fitness_evaluation, mask);
+    	[alpha_matte, fitness, Best, FSample, BSample, Un] = CC_DE_S(img, trimap, max_fitness_evaluation, mask);
         toc
         % profile
         p = profile('info');
         profsave(p, [de_path, 'profile/', file_name]);
-        save([de_path, file_name, '.mat'], 'alpha_matte', 'fitness', 'x');				
+        save([de_path, file_name, '.mat'], 'alpha_matte', 'fitness', 'Best', 'FSample', 'BSample', 'Un');				
     	imwrite(alpha_matte, [de_path, file_name, '_without_smoothing.png']);
         end
         
-        % CSO no CC
+        % CSO
         if run_cso && ~exist([cso_path, file_name, '_without_smoothing.png'], 'file')
         profile on -memory
         tic
